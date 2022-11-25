@@ -14,6 +14,19 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% if app.user %}   
+            <a href="{{ path('app_logout') }}">Se Déconnecter</a>
+            <a href=""> Mon Profil</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Se Connecter</a><br>
+            <a href="{{ path('app_register') }}">S'enregistrer</a>       
+        {% endif %} 
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="">Panneau D'administrration</a><br>      
+        {% endif %}
+        
+        {% block body %}
+        {% endblock %}
     </body>
 </html>
